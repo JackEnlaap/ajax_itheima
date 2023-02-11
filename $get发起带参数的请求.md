@@ -1,0 +1,1 @@
+## $.get(url,{id: 1},function(){})      

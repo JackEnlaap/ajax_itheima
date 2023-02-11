@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var fd = new FormData();
+
+        // 为FormData添加表单项
+        fd.append('uname','张三');
+        fd.append('upwd','123456')
+
+        // 创建xhr对象
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('POST','http://www.liulongbin.top:3006/api/formdata')
+
+        // 直接提交FormData对象,这与提交网页表单的效果,完全一样
+        xhr.send(fd);
+
+        xhr.onreadystatechange = function() {
+            if(xhr.readyState === 4 && xhr.status === 200) {
+                var result = JSON.parse(xhr.responseText)
+                console.log(typeof result);
+                // console.log(xhr.responseText);
+            }
+        }
+    </script>
+</body>
+</html>
