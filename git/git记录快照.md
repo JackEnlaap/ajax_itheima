@@ -96,3 +96,74 @@ Changes not staged for commit:
 
 `git reset --hard <CommitID>` 根据指定的提交ID回退到指定版本 
 
+`git push` 将新增代码推送到Git仓库(第二次以后提交)
+
+`git clone 仓库地址` 将远程仓库克隆到本地
+
+### master主分支
+实际工作中，master主分支的作用是：<font color='red'>用来保存和记录整个项目已完成的功能代码。</font>
+不允许程序员直接在master分支上修改代码，因为这样做风险太高，容易导致整个项目崩溃
+
+### 功能分支
+功能分支指的是专门用来开发新功能的分支，它是临时从master主分支上分叉出来的，当心功能开发且测试完毕后，最终需要合并到master主分支上
+
+### 查看分支列表
+`git branch`
+
+分支名字前面的*号表示当前所处的分支
+
+### 创建新分支
+<font color='red'>基于当前分支，创建一个新分支</font>，此时新分支的代码和当前分支完全一样
+`git branch 分支名称`
+<font color='red'><b>注意：执行完创建分支的命令之后，用户当前所处的分支还是master分支</b></font>
+
+### 切换分支
+切换到指定的分支上进行开发
+`git 
+
+### 快速创建并切换分支
+-b 表示创建一个新分支
+`git checkout -b 分支名称`
+是下面两条命令的简写形式
+1. `git branch 分支名称`
+2. `git checkout 分支名称`
+
+### 合并分支
+功能分支的代码开发测试完毕之后，可以使用如下命令，将完成之后的代码合并到master主分支上：
+假设要把C分支的代码合并到A分支，则必须先切换到A分支上，再运行`git merge`命令,来合并C分支
+<font color='red'><b>必须切换到master分支</b></font>
+`git checkout master`
+在master分支上运行git merge命令,将login分支的代码合并到master主分支上
+`git merge login`
+
+### 删除分支
+`git branch -d login`需要在主分支上删除
+
+
+### 遇到冲突时的分支合并
+如果是在两个不同的分支中，对<font color='red'>同一个文件</font>进行了<font color='red'>不同的修改</font>，git就无法干净的合并它们。此时，我们需要打开这些包含冲突的文件然后<font color='red'>手动解决冲突</font>
+
+-  打开包含冲突的文件。手动解决冲突之后，再执行
+`git add .`
+`git commit -m'解决了分支合并冲突的问题'`
+
+### 将本地分支推送到远程仓库
+- -u 表示把本地分支和远程分支进行关联，只在第一次推送的时候需要带 -u 参数，此后可以直接使用`git push`推送代码到远程分支
+`git push -u 远程仓库的别名 本地分支名称:远程分支名称`    
+简化不加分支别名
+
+### 查看远程仓库中所有的分支列表
+`git remote show 远程仓库别名`
+
+### 跟踪分支
+从远程仓库中，把远程分支下载到本地仓库中
+`git checkout 远程分支的 名称`
+- 把远程分支下载到本地仓库并重命名
+`git checkout -b 本地分支的名称 远程仓库名称/远程分支的名称`
+- 拉取远程分支的最新代码,保持当前分支的代码和远程分支代码一致
+`git pull`
+
+### 删除远程分支
+- `git push 远程仓库名称 --delete 远程分支名称`
+- # 示例
+- `git push origin --delete register`
